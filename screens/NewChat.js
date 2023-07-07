@@ -1,7 +1,7 @@
 import { Button, Input } from "@rneui/base";
 import { addDoc, collection } from "firebase/firestore";
 import { useLayoutEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { db } from "../firebase";
 
 const NewChat = ({ navigation }) => {
@@ -26,7 +26,6 @@ const NewChat = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>NewChat</Text>
       <Input
         placeholder="Enter a chat name"
         value={input}
@@ -37,6 +36,7 @@ const NewChat = ({ navigation }) => {
       <Button
         containerStyle={{ width: 200, alignSelf: "center" }}
         onPress={createChat}
+        disabled={!input}
         title="Create New Chat"
         type="outline"
       />
@@ -44,6 +44,11 @@ const NewChat = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+    flex: 1,
+  },
+});
 
 export default NewChat;

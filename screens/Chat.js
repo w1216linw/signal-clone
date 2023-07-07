@@ -122,7 +122,7 @@ const Chat = ({ navigation, route }) => {
                     key={id}
                     style={[style.messageWrapper, { alignSelf: "flex-end" }]}
                   >
-                    <View style={style.message}>
+                    <View style={[style.message, { maxWidth: "70%" }]}>
                       <Text>{data.message}</Text>
                     </View>
                     <Avatar

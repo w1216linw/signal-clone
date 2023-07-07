@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StatusBar } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import Chat from "./screens/Chat";
 import HomeScreen from "./screens/HomeScreen";
 import Login from "./screens/Login";

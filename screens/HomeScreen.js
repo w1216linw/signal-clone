@@ -32,9 +32,7 @@ const HomeScreen = ({ navigation }) => {
         </View>
       ),
       headerRight: () => (
-        <TouchableOpacity
-          onPress={() => console.log(auth?.currentUser?.displayName)}
-        >
+        <TouchableOpacity>
           <Avatar source={{ uri: auth?.currentUser?.photoURL }} rounded />
         </TouchableOpacity>
       ),
