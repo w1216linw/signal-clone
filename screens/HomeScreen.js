@@ -42,6 +42,16 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (!authUser) {
+        navigation.replace("Login");
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "chats"), (snapshot) => {
       const newData = snapshot.docs.map((doc) => {
         return {
@@ -55,12 +65,24 @@ const HomeScreen = ({ navigation }) => {
     return () => unsubscribe();
   }, []);
 
+  const enterChat = (id, name) => {
+    navigation.navigate("Chat", {
+      id,
+      name,
+    });
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView style={{ height: "100%" }}>
         {chats.length > 0 &&
           chats.map(({ id, data: { chatName } }) => (
-            <CustomListItem id={id} chatName={chatName} key={id} />
+            <CustomListItem
+              id={id}
+              name={chatName}
+              key={id}
+              enterChat={enterChat}
+            />
           ))}
       </ScrollView>
       <Button

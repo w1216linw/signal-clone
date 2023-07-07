@@ -1,6 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "react-native";
+import Chat from "./screens/Chat";
 import HomeScreen from "./screens/HomeScreen";
 import Login from "./screens/Login";
 import NewChat from "./screens/NewChat";
@@ -17,6 +18,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="NewChat" component={NewChat} />
+        <Stack.Screen name="Chat" component={Chat} />
       </Stack.Navigator>
     </NavigationContainer>
   );

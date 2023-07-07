@@ -2,7 +2,13 @@ import { Button, Image, Input } from "@rneui/base";
 import { StatusBar } from "expo-status-bar";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { KeyboardAvoidingView, StyleSheet, View } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { auth } from "../firebase";
 
 const Login = ({ navigation }) => {
@@ -28,36 +34,42 @@ const Login = ({ navigation }) => {
   }, []);
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <StatusBar style="dark" />
-      <Image
-        source={{ uri: "https://picsum.photos/200" }}
-        containerStyle={{ width: 200, height: 200, marginBottom: 20 }}
-      />
-      <View style={styles.inputContainer}>
-        <Input
-          antoFocus
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView style={styles.container}>
+        <StatusBar style="dark" />
+        <Image
+          source={{ uri: "https://picsum.photos/200" }}
+          containerStyle={{ width: 200, height: 200, marginBottom: 20 }}
         />
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
+        <View style={styles.inputContainer}>
+          <Input
+            antoFocus
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+          />
+          <Input
+            secureTextEntry={true}
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            onSubmitEditing={login}
+          />
+        </View>
+        <Button
+          title={"Login"}
+          containerStyle={styles.button}
+          onPress={login}
         />
-      </View>
-      <Button title={"Login"} containerStyle={styles.button} onPress={login} />
-      <Button
-        title={"Register"}
-        containerStyle={styles.button}
-        type="outline"
-        onPress={() => navigation.navigate("Register")}
-      />
-      <View style={{ height: 100 }} />
-    </KeyboardAvoidingView>
+        <Button
+          title={"Register"}
+          containerStyle={styles.button}
+          type="outline"
+          onPress={() => navigation.navigate("Register")}
+        />
+        <View style={{ height: 100 }} />
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
